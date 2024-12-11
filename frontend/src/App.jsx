@@ -6,7 +6,6 @@ import { Assessment } from './pages/Assessment'
 import { Landing } from './pages/Landing'
 import { Home } from './pages/Home'
 import VideosPage from './pages/VideosPage'
-import "./app.css"
 
 function App() {
   return (

@@ -14,7 +14,7 @@ camera = None
 CORS(bp)
 
 # MongoDB setup
-client = MongoClient("mongodb+srv://pranavhore1455:Pranav%402003@cluster0.8ucsl.mongodb.net/")  # Update this with your MongoDB URI
+client = MongoClient("mongodb://localhost:27017/")  # Update this with your MongoDB URI
 db = client["video_storage"]
 fs = gridfs.GridFS(db)
 
@@ -187,22 +187,32 @@ def get_videos():
     
     return jsonify({"videos": video_files}), 200
 
+
 @bp.route('/video/<file_id>', methods=['GET'])
 def serve_video(file_id):
+    video_file = fs.get(file_id)
+    
+    # Temporarily save the .avi video to disk
+    temp_avi_path = 'temp_video.avi'
+    with open(temp_avi_path, 'wb') as f:
+        f.write(video_file.read())
+
+    # Convert the .avi video to .mp4 format using ffmpeg
+    temp_mp4_path = 'temp_video.mp4'
     try:
-        # Fetch the video file from MongoDB
-        video_file = fs.get(file_id)
+        ffmpeg.input(temp_avi_path).output(temp_mp4_path, vcodec='libx264', acodec='aac').run()
         
-        # Check if the content type is already 'video/mp4' (or any other valid type)
-        content_type = video_file.content_type or 'video/mp4'
+        # Read the converted .mp4 video and send it to the frontend
+        with open(temp_mp4_path, 'rb') as f:
+            video_data = BytesIO(f.read())
+            video_data.seek(0)  # Reset pointer to the start of the file
+        
+        # Remove the temporary video files
+        os.remove(temp_avi_path)
+        os.remove(temp_mp4_path)
 
-        # Return the video file as a stream without converting it to disk
-        return Response(
-            video_file, 
-            mimetype=content_type, 
-            content_type=content_type
-        )
-
+        return send_file(video_data, mimetype='video/mp4', as_attachment=False)
     except Exception as e:
-        print(f"Error serving video: {e}")
+        print(f"Error converting video: {e}")
+        os.remove(temp_avi_path)
         return {"error": "Error processing video."}, 500
