@@ -24,9 +24,15 @@ const VideosPage = () => {
 
     const handleVideoClick = (fileId) => {
         const videoElement = document.getElementById('video-player');
-        videoElement.src = `http://127.0.0.1:5000/face/video/${fileId}`;
-        videoElement.play();
+        const sourceElement = videoElement.querySelector('source');
+
+        // Update the source to point to the video stream URL
+        sourceElement.src = `http://127.0.0.1:5000/face/video/${fileId}`;
+        videoElement.load();  // Reload the video element with the new source
+        videoElement.play();  // Start playing the video
     };
+
+
 
     if (loading) {
         return <div>Loading videos...</div>;
@@ -59,6 +65,7 @@ const VideosPage = () => {
                     <source type="video/mp4" />
                     Your browser does not support the video tag.
                 </video>
+
             </div>
         </div>
     );
