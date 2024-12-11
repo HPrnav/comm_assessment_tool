@@ -1,0 +1,52 @@
+.videos-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.video-player-container {
+    margin-bottom: 20px;
+}
+
+.selected-video-player {
+    width: 80%;
+    margin: 0 auto;
+    background-color: #000;
+    border: 2px solid #ccc;
+}
+
+.videos-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.videos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.video-item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.video-item:hover {
+    transform: scale(1.05);
+}
+
+.video-item h3 {
+    margin: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.video-item p {
+    font-size: 14px;
+    color: #666;
+}

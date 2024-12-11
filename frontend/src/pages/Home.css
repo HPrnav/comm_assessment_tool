@@ -1,0 +1,156 @@
+/* General styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    text-align: center;
+    width: 100%;
+    max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Video container */
+.video-container {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#video {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+/* Loading text */
+.text-gray-700 {
+    color: #4a4a4a;
+}
+
+/* Buttons */
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px;
+}
+
+.bg-blue-500 {
+    background-color: #3b82f6;
+}
+
+.bg-gray-500 {
+    background-color: #6b7280;
+}
+
+.bg-green-500 {
+    background-color: #10b981;
+}
+
+.bg-red-500 {
+    background-color: #ef4444;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Transcript and microphone status */
+.text-lg {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.mb-4 {
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Dialog */
+.dialog {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.dialog-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+}
+
+.dialog-content p {
+    margin-bottom: 20px;
+}
+
+.dialog-content button {
+    margin-top: 10px;
+}
+
+/* Adjustments for button click to expand width/height */
+.container.expanded {
+    width: 90%;
+    max-width: 100%;
+    height: auto;
+}
+
+.container.expanded .video-container {
+    margin-top: 20px;
+}
+
+.container.expanded #video {
+    height: 500px;
+    object-fit: cover;
+}
+
+.container.expanded .flex {
+    gap: 20px;
+}
